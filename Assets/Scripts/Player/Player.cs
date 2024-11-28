@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int jumpHeight;
+    [SerializeField]
+    private int attackDamage { get; set; }
+
+    [SerializeField]
+    private GameObject projectile;
     public int Speed
     {
         get => speed;
@@ -44,6 +49,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+        }
+    }
+
+
+    void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    public void SpawnProjectile()
+    {
+        Transform projectileSpawn = transform.Find("spawnPoint");
+        Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
     }
 }
