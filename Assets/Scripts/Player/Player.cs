@@ -66,4 +66,18 @@ public class Player : MonoBehaviour
         Transform projectileSpawn = transform.Find("spawnPoint");
         Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 }
