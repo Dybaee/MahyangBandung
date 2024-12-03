@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        animator.SetTrigger("GetHit");  
         health -= damage;
         if (health <= 0)
         {

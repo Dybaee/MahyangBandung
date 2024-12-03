@@ -35,9 +35,26 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 
+    void Move()
+    {
+        GameObject player = getNearestPlayer();
+        if (player != null)
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            if (distance > _attackRange)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, _moveSpeed * Time.deltaTime);
+                _animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                _animator.SetBool("IsWalking", false);
+            }
+        }
+    }
 
     GameObject getNearestPlayer()
     {
