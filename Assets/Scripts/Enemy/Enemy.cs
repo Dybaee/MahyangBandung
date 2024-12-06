@@ -47,9 +47,25 @@ public class Enemy : MonoBehaviour
             if (distance > _attackRange)
             {
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, _moveSpeed * Time.deltaTime);
+                if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "IsWalking")
+                {
+                    //interupt other animation
+                    _animator.SetBool("IsWalking", true);
+                }
+                //check if move forward or not
                 _animator.SetBool("IsWalking", true);
+                //check direction
+                Vector3 direction = player.transform.position - transform.position;
+                if (direction.x > 0)
+                {
+                    transform.localScale = new Vector3(-1.37f, 1.37f, -1.37f);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(1.37f, 1.37f, 1.37f);
+                }
             }
-            else
+            else if (distance <= _attackRange)
             {
                 _animator.SetBool("IsWalking", false);
             }
