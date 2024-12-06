@@ -64,7 +64,9 @@ public class Player : MonoBehaviour
     public void SpawnProjectile()
     {
         Transform projectileSpawn = transform.Find("spawnPoint");
-        Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
+        GameObject pro = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
+        pro.GetComponent<Projectile>().targetType = TargetType.Enemy;
+
     }
 
     public void TakeDamage(int damage)

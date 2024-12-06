@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject bulletPrefab;
+
     [SerializeField]
     private int _health;
     [SerializeField]
@@ -44,6 +46,16 @@ public class Enemy : MonoBehaviour
         if (player != null)
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
+            Vector3 direction = player.transform.position - transform.position;
+            if (direction.x > 0)
+            {
+                transform.localScale = new Vector3(-1.37f, 1.37f, -1.37f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1.37f, 1.37f, 1.37f);
+            }
+
             if (distance > _attackRange)
             {
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, _moveSpeed * Time.deltaTime);
@@ -55,15 +67,6 @@ public class Enemy : MonoBehaviour
                 //check if move forward or not
                 _animator.SetBool("IsWalking", true);
                 //check direction
-                Vector3 direction = player.transform.position - transform.position;
-                if (direction.x > 0)
-                {
-                    transform.localScale = new Vector3(-1.37f, 1.37f, -1.37f);
-                }
-                else
-                {
-                    transform.localScale = new Vector3(1.37f, 1.37f, 1.37f);
-                }
             }
             else if (distance <= _attackRange)
             {
@@ -118,6 +121,15 @@ public class Enemy : MonoBehaviour
         {
             player.GetComponent<Player>().TakeDamage(_damage);
         }
+    }
+
+    public void Shoot()
+    {
+        Transform spawnPoint = transform.Find("SpawnPoint");
+        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.identity);
+        bullet.GetComponent<Projectile>().targetType = TargetType.Player;
+        bullet.GetComponent<Projectile>().Target = GameObject.FindGameObjectWithTag("Player").transform;
+        
     }
 
     public void TakeDamage(int damage)
