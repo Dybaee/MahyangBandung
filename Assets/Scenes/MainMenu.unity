@@ -6022,6 +6022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 597999233}
+  - component: {fileID: 597999234}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -6044,6 +6045,19 @@ Transform:
   m_Father: {fileID: 1797186825}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597999234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597999231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb293f16dca87d4c83f07c78aa3f0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsUI: {fileID: 471630920}
 --- !u!1 &608729647
 GameObject:
   m_ObjectHideFlags: 0
@@ -13213,6 +13227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ba3fa8fe3b5b54881e326c900da357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Gameplay
   anim: {fileID: 76593119}
 --- !u!1 &2056195089
 GameObject:
