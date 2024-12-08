@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour
     private float _damage;
     [SerializeField]
 
+    private float _lifeTime = 10f;
+
     private Transform _target;
     public Transform Target
     {

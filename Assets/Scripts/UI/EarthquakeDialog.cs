@@ -5,26 +5,32 @@ using UnityEngine;
 public class EarthquakeDialog : MonoBehaviour
 {
     public GameObject dialogSystem;
-
-    public MonoBehaviour playerMovementScript;
+    public PlayerMovement playerMovementScript;
     public MonoBehaviour dialogueScript;
     private bool InRange;
 
     private void Update()
     {
-        if (InRange)
+        if (InRange && Input.GetKeyDown(KeyCode.E)) 
         {
-            if (dialogSystem != null)
-            {
-                bool dialogActive = !dialogSystem.activeSelf;
-                dialogSystem.SetActive(dialogActive);
-                dialogueScript.enabled = dialogActive; // Enable dialogue script only when dialog is active
-                playerMovementScript.enabled = !dialogActive; // Disable player movement when dialog is active
-            }
-            else
-            {
-                Debug.LogWarning("Dialog System is not assigned!");
-            }
+            ToggleDialog();
+        }
+    }
+
+    private void ToggleDialog()
+    {
+        if (dialogSystem != null)
+        {
+            bool dialogActive = !dialogSystem.activeSelf;
+            dialogSystem.SetActive(dialogActive);
+            dialogueScript.enabled = dialogActive;
+            playerMovementScript.enabled = !dialogActive; 
+
+            Debug.Log(dialogActive ? "Dialog opened." : "Dialog closed.");
+        }
+        else
+        {
+            Debug.LogWarning("Dialog System is not assigned!");
         }
     }
 
@@ -33,7 +39,6 @@ public class EarthquakeDialog : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             InRange = true;
-            Debug.Log("Player entered range.");
         }
     }
 
@@ -42,7 +47,6 @@ public class EarthquakeDialog : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             InRange = false;
-            Debug.Log("Player exited range.");
             if (dialogSystem != null && dialogSystem.activeSelf)
             {
                 dialogSystem.SetActive(false);
@@ -54,6 +58,6 @@ public class EarthquakeDialog : MonoBehaviour
 
     public void ShowDialog()
     {
-        dialogSystem.SetActive(true); 
+        dialogSystem.SetActive(true);
     }
 }
