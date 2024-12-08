@@ -20,6 +20,8 @@ public class Projectile : MonoBehaviour
 
     private VisualEffect _vfx;
     public TargetType targetType;
+
+    private bool _isLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,25 +30,27 @@ public class Projectile : MonoBehaviour
         {
             _vfx.Play();
         }
+
+        if (_target.position.x < transform.position.x)
+        {
+            _isLeft = true;
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            _isLeft = false;
+            transform.localScale = new Vector3(1, 1, 1);
+        }   
     }
 
     // Update is called once per frame
     void Update()
     {
         //Move forward to target
-        if (_target != null)
+
+        if (_isLeft)
         {
-            //Move projectile left or right depending on the target position
-            if (_target.position.x < transform.position.x)
-            {
-                transform.Translate(Vector3.left * _speed * Time.deltaTime);
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                transform.Translate(Vector3.right * _speed * Time.deltaTime);
-                transform.localScale = new Vector3(1, 1, 1);
-            }
+            transform.Translate(Vector3.left * _speed * Time.deltaTime);
         }
         else
         {
