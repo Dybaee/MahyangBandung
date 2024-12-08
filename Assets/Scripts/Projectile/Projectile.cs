@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour
     private float _damage;
     [SerializeField]
 
+    private float _lifeTime = 10f;
+
     private Transform _target;
     public Transform Target
     {
@@ -57,7 +59,11 @@ public class Projectile : MonoBehaviour
             transform.Translate(Vector3.right * _speed * Time.deltaTime);
         }
 
-
+        _lifeTime -= Time.deltaTime;
+        if (_lifeTime <= 0)
+        {
+            Destroy(gameObject);
+        }
 
     }
 

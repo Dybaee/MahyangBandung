@@ -28,6 +28,6 @@ public class EarthquakeTrigger : MonoBehaviour
         earthquakeDialog.enabled = true; 
         earthquakeDialog.ShowDialog(); 
 
-        Destroy(earthquakeTrigger, 5f);
+        Destroy(earthquakeTrigger, 10f);
     }
 }
