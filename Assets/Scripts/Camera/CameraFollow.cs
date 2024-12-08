@@ -12,7 +12,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     private Vector3 _offset;
 
-
+    [SerializeField]
+    private float _mixX;
+    [SerializeField]
+    private float _maxX;
     // Update is called once per frame
     void Update()
     {
@@ -24,8 +27,8 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 desiredPosition = _player.position + _offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
+        smoothedPosition = new Vector3(Mathf.Clamp(smoothedPosition.x, _mixX, _maxX), smoothedPosition.y, smoothedPosition.z);
         transform.position = smoothedPosition;
-
         transform.LookAt(_player);
     }
 }

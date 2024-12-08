@@ -24,8 +24,6 @@ public class Projectile : MonoBehaviour
     public TargetType targetType;
 
     private bool _isLeft;
-
-    private float _lifeTime = 10f;
     // Start is called before the first frame update
     void Start()
     {
