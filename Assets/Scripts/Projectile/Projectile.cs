@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour
     public TargetType targetType;
 
     private bool _isLeft;
+
+    private float _lifeTime = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,16 +33,20 @@ public class Projectile : MonoBehaviour
             _vfx.Play();
         }
 
-        if (_target.position.x < transform.position.x)
+        if (_target != null)
         {
-            _isLeft = true;
-            transform.localScale = new Vector3(-1, 1, 1);
+            if (_target.position.x < transform.position.x)
+            {
+                _isLeft = true;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                _isLeft = false;
+                transform.localScale = new Vector3(1, 1, 1);
+            }   
         }
-        else
-        {
-            _isLeft = false;
-            transform.localScale = new Vector3(1, 1, 1);
-        }   
+
     }
 
     // Update is called once per frame
@@ -57,7 +63,11 @@ public class Projectile : MonoBehaviour
             transform.Translate(Vector3.right * _speed * Time.deltaTime);
         }
 
-
+        _lifeTime -= Time.deltaTime;
+        if (_lifeTime <= 0)
+        {
+            Destroy(gameObject);
+        }
 
     }
 
