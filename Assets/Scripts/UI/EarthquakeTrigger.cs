@@ -7,6 +7,7 @@ public class EarthquakeTrigger : MonoBehaviour
     public Animator anim;
     public GameObject earthquakeCamera;
     public GameObject earthquakeTrigger;
+    public EarthquakeDialog earthquakeDialog;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,10 +20,14 @@ public class EarthquakeTrigger : MonoBehaviour
     private IEnumerator EarthquakeCam()
     {
         earthquakeCamera.SetActive(true);
-        anim.SetBool("IsEarthquake", true); 
+        anim.SetBool("IsEarthquake", true);
         yield return new WaitForSeconds(3f);
         anim.SetBool("IsEarthquake", false);
         earthquakeCamera.SetActive(false);
-        Destroy(earthquakeTrigger);
+
+        earthquakeDialog.enabled = true; 
+        earthquakeDialog.ShowDialog(); 
+
+        Destroy(earthquakeTrigger, 5f);
     }
 }
