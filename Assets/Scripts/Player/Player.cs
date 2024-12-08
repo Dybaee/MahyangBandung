@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject projectile;
+    private bool isDialogActive = false;
+
     public int Speed
     {
         get => speed;
@@ -43,13 +45,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !isDialogActive)
         {
             Attack();
         }
@@ -82,5 +84,10 @@ public class Player : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void SetDialogActive(bool isActive)
+    {
+        isDialogActive = isActive;
     }
 }

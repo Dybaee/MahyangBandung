@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Ground
   - Traps
+  - TriggerEarthquake
   layers:
   - Default
   - TransparentFX
