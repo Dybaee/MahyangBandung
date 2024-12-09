@@ -17,6 +17,14 @@ public class DialogSystemEarly : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(StartDialogEarly());
+    }
+
+    IEnumerator StartDialogEarly()
+    {
+        playerMovement.enabled = false;
+        playerScript.enabled = false;
+        yield return new WaitForSeconds(3f);
         dialogBox.SetActive(true);
         textComponent.text = string.Empty;
         StartDialogue();

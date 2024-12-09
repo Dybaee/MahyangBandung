@@ -8,6 +8,7 @@ public class EarthquakeDialog : MonoBehaviour
     public PlayerMovement playerMovementScript;
     public MonoBehaviour dialogueScript;
     private bool InRange;
+    public bool IsDialogActive;
 
     private void Update()
     {
@@ -21,6 +22,7 @@ public class EarthquakeDialog : MonoBehaviour
     {
         if (dialogSystem != null)
         {
+            IsDialogActive = true;
             bool dialogActive = !dialogSystem.activeSelf;
             dialogSystem.SetActive(dialogActive);
             dialogueScript.enabled = dialogActive;
@@ -30,6 +32,7 @@ public class EarthquakeDialog : MonoBehaviour
         }
         else
         {
+            IsDialogActive = false;
             Debug.LogWarning("Dialog System is not assigned!");
         }
     }

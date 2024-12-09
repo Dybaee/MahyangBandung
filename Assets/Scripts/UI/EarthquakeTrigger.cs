@@ -8,6 +8,8 @@ public class EarthquakeTrigger : MonoBehaviour
     public GameObject earthquakeCamera;
     public GameObject earthquakeTrigger;
     public EarthquakeDialog earthquakeDialog;
+    public Player playerScript;
+    public PlayerMovement playerMovement;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,14 +21,19 @@ public class EarthquakeTrigger : MonoBehaviour
 
     private IEnumerator EarthquakeCam()
     {
+        playerMovement.enabled = false;
+        playerScript.enabled = false;
         earthquakeCamera.SetActive(true);
         anim.SetBool("IsEarthquake", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("IsEarthquake", false);
         earthquakeCamera.SetActive(false);
 
         earthquakeDialog.enabled = true; 
-        earthquakeDialog.ShowDialog(); 
+        earthquakeDialog.ShowDialog();
+        playerMovement.enabled = true;
+        playerScript.enabled = true;
+
 
         Destroy(earthquakeTrigger, 10f);
     }

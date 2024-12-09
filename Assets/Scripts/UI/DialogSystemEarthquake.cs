@@ -13,14 +13,22 @@ public class DialogSystemEarthquake : MonoBehaviour
     private int index;
     public Player playerScript;
     public PlayerMovement playerMovement;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(StartDialogEarthquake());
+    }
+
+    IEnumerator StartDialogEarthquake()
+    {
+        playerMovement.enabled = false;
+        playerScript.enabled = false;
         dialogBox.SetActive(true);
         textComponent.text = string.Empty;
         StartDialogue();
+        yield break;
     }
 
     // Update is called once per frame
