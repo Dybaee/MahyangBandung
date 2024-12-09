@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,10 +72,13 @@ public class Player : MonoBehaviour
 
     }
 
+    public Action OnTakeDamage;
+
     public void TakeDamage(int damage)
     {
         animator.SetTrigger("GetHit");  
         health -= damage;
+        OnTakeDamage?.Invoke();
         if (health <= 0)
         {
             Die();

@@ -2977,7 +2977,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6310ee71fa1fdb44db62f904746fd2a2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6310ee71fa1fdb44db62f904746fd2a2,
         type: 3}
@@ -4524,7 +4524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &892014868
 Transform:
   m_ObjectHideFlags: 0
@@ -11423,6 +11423,7 @@ GameObject:
   - component: {fileID: 1753573199}
   - component: {fileID: 1753573201}
   - component: {fileID: 1753573200}
+  - component: {fileID: 1753573202}
   m_Layer: 0
   m_Name: PlayerHP
   m_TagString: Untagged
@@ -11491,6 +11492,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753573198}
   m_CullTransparentMesh: 1
+--- !u!114 &1753573202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753573198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ce5b28829ac84f95a3772894ad0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  checkPointSystem: {fileID: 2063180625}
+  healthImage:
+  - {fileID: 2138410368}
+  - {fileID: 980010161}
+  - {fileID: 1390288782}
+  lostLifeSprite: {fileID: 0}
 --- !u!1 &1769342348
 GameObject:
   m_ObjectHideFlags: 0
@@ -12273,7 +12293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2015759016
 Transform:
   m_ObjectHideFlags: 0
