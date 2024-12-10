@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private Player _player;
     private Vector3 _velocity;
-    private float _gravity = -9.8f;
+    private float _gravity = -10f;
 
     [SerializeField]
     // Start is called before the first frame update
@@ -36,7 +36,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocity.y += _gravity * Time.deltaTime;
         }
-        
+        else
+        {
+            if (_velocity.y < 0)
+            {
+                _player.animator.SetBool("IsJumping", false);
+                _velocity.y = 0; 
+            }
+        }
         _controller.Move((velocity + _velocity) * Time.deltaTime);
         
 
@@ -47,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (_controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             _velocity.y = Mathf.Sqrt(_player.JumpHeight * -2f * _gravity);
-            _player.animator.SetTrigger("Jump");
+            _player.animator.SetBool("IsJumping", true);
         }
     }
 
