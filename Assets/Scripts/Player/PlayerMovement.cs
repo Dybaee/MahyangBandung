@@ -40,8 +40,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_velocity.y < 0)
             {
-                _player.animator.SetBool("IsJumping", false);
                 _velocity.y = 0; 
+                if (_player.animator.GetBool("IsJumping"))
+                {
+                    // wait until the animation is done and then set the bool to false
+                    StartCoroutine(WaitForAnimation("Jump", 0));
+                }
             }
         }
         controller.Move((velocity + _velocity) * Time.deltaTime);
@@ -49,6 +53,18 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    IEnumerator WaitForAnimation(string animationName, int layer)
+    {
+        AnimatorStateInfo stateInfo = _player.animator.GetCurrentAnimatorStateInfo(layer);
+        while (stateInfo.IsName(animationName) && stateInfo.normalizedTime < 1.0f)
+        {
+            yield return null;
+            stateInfo = _player.animator.GetCurrentAnimatorStateInfo(layer);
+        }
+        _player.animator.SetBool("IsJumping", false);
+    }
+
+    public GameObject torso;
     void Jump()
     {
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
