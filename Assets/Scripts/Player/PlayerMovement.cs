@@ -34,24 +34,21 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         Vector3 velocity = direction * _player.Speed;
         _player.animator.SetBool("IsRunning", velocity != Vector3.zero);
-        if (!controller.isGrounded)
+        controller.Move((velocity + _velocity) * Time.deltaTime);
+        if (_velocity.y < 0 && controller.isGrounded)
         {
-            _velocity.y += _gravity * Time.deltaTime;
+            _velocity.y = -1; 
+            // if (_player.animator.GetBool("IsJumping"))
+            // {
+            //     // wait until the animation is done and then set the bool to false
+            //     StartCoroutine(WaitForAnimation("Jump", 0));
+            // }
+            _player.animator.SetBool("IsJumping", false);
         }
         else
         {
-            if (_velocity.y < 0)
-            {
-                _velocity.y = 0; 
-                if (_player.animator.GetBool("IsJumping"))
-                {
-                    // wait until the animation is done and then set the bool to false
-                    StartCoroutine(WaitForAnimation("Jump", 0));
-                }
-            }
+            _velocity.y += _gravity * Time.deltaTime;
         }
-        controller.Move((velocity + _velocity) * Time.deltaTime);
-        
 
     }
 
