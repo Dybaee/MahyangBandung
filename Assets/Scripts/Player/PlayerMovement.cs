@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     private Player _player;
     private Vector3 _velocity;
+    [SerializeField]
     private float _gravity = -10f;
 
     [SerializeField]
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _player = GetComponent<Player>();
         controller = GetComponent<CharacterController>();
+        
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public GameObject torso;
+    public bool isGrounded;
     void Jump()
     {
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
@@ -89,6 +92,18 @@ public class PlayerMovement : MonoBehaviour
             _player.transform.localScale = new Vector3(3, 3, 3);
         }
     }
+
+
+
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
 
     void Climb()
     {
@@ -117,21 +132,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public bool isClimable;
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        // if (hit.gameObject.CompareTag("Ladder"))
-        // {
-        //     Debug.Log("Ladder");
-        //     isClimable = true;
-        // }
-        // else
-        // {
-        //     Debug.Log("Not Ladder");
-        //     isClimable = false;
-        // }
-    }
-
 
     void OnTriggerStay(Collider other)
     {
