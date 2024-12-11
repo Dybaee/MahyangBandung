@@ -98,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
             _velocity.y = 0;
             _player.animator.SetBool("IsClimbing", true);
             float verticalInput = Input.GetAxis("Vertical");
+            // set the animation speed to vertical input
+            _player.animator.speed = Mathf.Abs(verticalInput);
             Vector3 direction = new Vector3(0, verticalInput, 0);
             Vector3 velocity = direction * _player.ClimbSpeed;
             controller.Move(velocity * Time.deltaTime);
@@ -107,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            _player.animator.speed = 1;
             _velocity.y += _gravity * Time.deltaTime;
             _player.animator.SetBool("IsClimbing", false);
             transform.rotation = Quaternion.Euler(0, -90, 0);
