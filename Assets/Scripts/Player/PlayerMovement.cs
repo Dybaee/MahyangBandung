@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
-    private CharacterController _controller;
+    public CharacterController controller;
     private Player _player;
     private Vector3 _velocity;
     private float _gravity = -10f;
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _player = GetComponent<Player>();
-        _controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Jump();
+        Climb();
         UpdateFlip();
-        Debug.Log(_controller.isGrounded);
     }
 
     void Move()
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         Vector3 velocity = direction * _player.Speed;
         _player.animator.SetBool("IsRunning", velocity != Vector3.zero);
-        if (!_controller.isGrounded)
+        if (!controller.isGrounded)
         {
             _velocity.y += _gravity * Time.deltaTime;
         }
@@ -44,29 +44,94 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.y = 0; 
             }
         }
-        _controller.Move((velocity + _velocity) * Time.deltaTime);
+        controller.Move((velocity + _velocity) * Time.deltaTime);
         
 
     }
 
     void Jump()
     {
-        if (_controller.isGrounded && Input.GetButtonDown("Jump"))
+        if (controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             _velocity.y = Mathf.Sqrt(_player.JumpHeight * -2f * _gravity);
             _player.animator.SetBool("IsJumping", true);
         }
     }
-
     void UpdateFlip()
     {
-        if (Input.GetAxis("Horizontal") < 0)
+        if (isClimable)
         {
-            _player.transform.localScale = new Vector3(3,3,3);
+            return;
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        float horizontalInput = Input.GetAxis("Horizontal");
+        if (horizontalInput < 0)
         {
-            _player.transform.localScale = new Vector3(3,3,-3);
+            _player.transform.localScale = new Vector3(3, 3, -3);
+        }
+        else if (horizontalInput > 0)
+        {
+            _player.transform.localScale = new Vector3(3, 3, 3);
+        }
+    }
+
+    void Climb()
+    {
+        if (isClimable)
+        {
+            //disable gravity
+            _velocity.y = 0;
+            _player.animator.SetBool("IsClimbing", true);
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector3 direction = new Vector3(0, verticalInput, 0);
+            Vector3 velocity = direction * _player.ClimbSpeed;
+            controller.Move(velocity * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale = new Vector3(3, 3, 3);
+
+        }
+        else
+        {
+            _velocity.y += _gravity * Time.deltaTime;
+            _player.animator.SetBool("IsClimbing", false);
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+    }
+
+    public bool isClimable;
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // if (hit.gameObject.CompareTag("Ladder"))
+        // {
+        //     Debug.Log("Ladder");
+        //     isClimable = true;
+        // }
+        // else
+        // {
+        //     Debug.Log("Not Ladder");
+        //     isClimable = false;
+        // }
+    }
+
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+            {
+                Debug.Log("Ladder");
+                isClimable = true;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            Debug.Log("Not Ladder");
+            isClimable = false;
         }
     }
 }

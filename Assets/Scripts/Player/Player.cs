@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int speed;
     [SerializeField]
+    private int climbSpeed;
+
+    [SerializeField]
     private int health;
 
     [SerializeField]
@@ -26,6 +29,12 @@ public class Player : MonoBehaviour
     private bool isDialogActive = false;
 
     public int Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+
+    public int ClimbSpeed
     {
         get => speed;
         set => speed = value;
@@ -52,7 +61,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !isDialogActive)
+        if (Input.GetButtonDown("Fire1") && !isDialogActive && _playerMovement.controller.isGrounded)
         {
             Attack();
         }
