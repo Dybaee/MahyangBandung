@@ -11,6 +11,7 @@ public class PausedMenu : MonoBehaviour
     public PlayerMovement playerScript;
     public Button resumeButton;
     public Button exitButton;
+    public GameObject healthBar;
 
     void Start()
     {
@@ -65,6 +66,7 @@ public class PausedMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
+        healthBar.SetActive(false);
         pauseMenuCanvas.SetActive(false);
         playerScript.enabled = false;
     }

@@ -14,7 +14,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _attackRange;
     [SerializeField]
+
     private float _moveSpeed;
+    [SerializeField]
+    private float _chaseRange;
     private Animator _animator;
     public int Health
     {
@@ -43,7 +46,7 @@ public class Enemy : MonoBehaviour
     void Move()
     {
         GameObject player = getNearestPlayer();
-        if (player != null)
+        if (player != null && Vector3.Distance(player.transform.position, transform.position) < _chaseRange)
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
             Vector3 direction = player.transform.position - transform.position;
@@ -77,7 +80,7 @@ public class Enemy : MonoBehaviour
 
     GameObject getNearestPlayer()
     {
-        Debug.Log("Finding player");    
+        Debug.Log("Finding player");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         GameObject nearestPlayer = null;
         float minDistance = Mathf.Infinity;
@@ -129,7 +132,7 @@ public class Enemy : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.identity);
         bullet.GetComponent<Projectile>().targetType = TargetType.Player;
         bullet.GetComponent<Projectile>().Target = GameObject.FindGameObjectWithTag("Player").transform;
-        
+
     }
 
     public void TakeDamage(int damage)
