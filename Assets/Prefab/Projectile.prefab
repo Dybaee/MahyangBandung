@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 15
-  _damage: 10
+  _damage: 25
   _lifeTime: 10
   targetType: 0
 --- !u!65 &5179261021539056746

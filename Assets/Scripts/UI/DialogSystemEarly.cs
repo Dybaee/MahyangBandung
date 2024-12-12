@@ -24,7 +24,7 @@ public class DialogSystemEarly : MonoBehaviour
     {
         playerMovement.enabled = false;
         playerScript.enabled = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         dialogBox.SetActive(true);
         textComponent.text = string.Empty;
         StartDialogue();
