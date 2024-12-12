@@ -5156,8 +5156,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1354807614}
     m_Modifications:
     - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
-      propertyPath: _attackRange
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 694642290}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _chaseRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _attackRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8527584949723026054, guid: f2a9ebe168f5cb64a9171168b9a26eca,
         type: 3}
@@ -9139,6 +9147,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1354807614}
     m_Modifications:
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 694642290}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _chaseRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _attackRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8527584949723026054, guid: f2a9ebe168f5cb64a9171168b9a26eca,
         type: 3}
       propertyPath: m_Name
@@ -11906,6 +11926,12 @@ Transform:
   m_Father: {fileID: 360307481}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &694642290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2599374748671744892, guid: 570c137d62ae59448810d468ee15ec7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1937796852}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &696693174
 GameObject:
   m_ObjectHideFlags: 0
@@ -25943,7 +25969,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1937796852}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 694642290}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9cdf6b845d7eb745bd1a3e4fb4c59b2, type: 3}
@@ -26225,6 +26251,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1354807614}
     m_Modifications:
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 694642290}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _chaseRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _attackRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8527584949723026054, guid: f2a9ebe168f5cb64a9171168b9a26eca,
         type: 3}
       propertyPath: m_Name
@@ -38751,6 +38789,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1354807614}
     m_Modifications:
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 694642290}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _chaseRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 534501095, guid: f2a9ebe168f5cb64a9171168b9a26eca, type: 3}
+      propertyPath: _attackRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8527584949723026054, guid: f2a9ebe168f5cb64a9171168b9a26eca,
         type: 3}
       propertyPath: m_Name
